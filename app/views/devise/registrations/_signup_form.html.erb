@@ -1,0 +1,116 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
+
+  <% if @invite %>
+    <input type="hidden" name="user[first_name]" value="<%=@invite.first_name%>" />
+    <input type="hidden" name="user[last_name]" value="<%=@invite.last_name%>" />
+  <% else %>
+
+    <div class="form-group">
+      <%= f.label :first_name, class: "control-label sr-only" %>
+      <div class="col-xs-6">
+        <%= f.text_field :first_name, class: "text-field form-control",  placeholder: "First Name" %>
+      </div>
+      <div class="col-xs-6">
+        <%= f.text_field :last_name, class: "text-field form-control", placeholder: "Last Name" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :username, class: "control-label sr-only" %>
+    <div class="col-xs-12">
+      <%= f.text_field :username, class: "text-field form-control", placeholder: "Choose a username" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "Work Email", class: "control-label sr-only" %>
+    <div class="col-xs-12">
+    <% if @invite %>
+      <%= f.email_field :email, class: "text-field form-control", placeholder: "Work Email", value: @invite.email %>
+    <% else %>
+      <%= f.email_field :email, class: "text-field form-control", placeholder: "Work Email" %>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, class: "control-label sr-only" %>
+    <div class="col-xs-12">
+      <%= f.password_field :password, class: "text-field form-control", placeholder: "Password" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, "Password Confirmation", class: "control-label sr-only" %>
+    <div class="col-xs-12">
+      <%= f.password_field :password_confirmation, class: "text-field form-control", placeholder: "Re-type password" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :job_title, "Job Title", class: 'control-label sr-only' %>
+    <div class="col-xs-12">
+      <%= f.text_field :job_title, class: "text-field form-control", placeholder: "Job Title" %>
+    </div>
+  </div>
+  
+  <% if params[:role]=="admin" %>
+    <div class="form-group">
+      <%= f.label :company, "Company or Team Name", class: 'control-label sr-only' %>
+      <div class="col-xs-12">
+        <%= text_field :company, "Company", class: "text-field form-control", placeholder: "Company or Team Name" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :team_size, "Select A Team Size", class: 'control-label col-xs-12' %>
+      <div class="btn-group-vertical col-xs-12" role="group">
+        <button type="button" class="btn btn-default col-xs-12 teamSizeButton active" data-value="1">1-5 Users</button>
+        <button type="button" class="btn btn-default col-xs-12 teamSizeButton" data-value="6">6-20 Users</button>
+        <button type="button" class="btn btn-default col-xs-12 teamSizeButton" data-value="21">Over 20 users</button>
+      </div>
+      <input type="hidden" name="user[team_size]" id="team_size" value="1"/>
+    </div>
+  <% elsif params[:role] == "employee" && @invite == nil %>
+
+    <div class="form-group">
+      <%= f.label :managers_email, "Your Manager's Email", class: "control-label sr-only" %>
+      <div class="col-xs-12">
+        <%= f.email_field :managers_email, class: "text-field form-control", placeholder: "Your Manager's Email" %>
+      </div>
+    </div>
+
+    <div class="form-group col-xs-12">
+      <%= f.label :is_manager, 'I am a manager', class: 'control-label' %>
+      <input type="checkbox" name="signup[is_manager]" />
+    </div>
+  <% end %>
+
+  <% if @invite %>
+    <input type="hidden" name="user[invite_id]" value="<%=@invite.id%>" />
+  <% end %>
+    
+
+
+
+  <div class="form-group">
+    <div class="col-xs-12">
+      <%= f.submit "SIGN UP", class: "btn btn-primary col-xs-12" %>
+    </div>
+  </div>
+
+  <% end %>
+
+
+<script type="text/javascript">
+  $(".teamSizeButton").click(function(){
+    $(".teamSizeButton").removeClass('active');
+    $(this).addClass('active');
+    var val = $(this).data("value");
+    $("#team_size").val(val);
+  });
+
+</script>
+
+
+

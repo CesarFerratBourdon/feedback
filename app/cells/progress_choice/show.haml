@@ -1,0 +1,6 @@
+%a{ href: '#', 'data-progress-value': @options[:progress] }
+  .row.progressChoiceHolder
+    .col-xs-3
+      = cell :quarter_circle, nil, progress: @options[:progress]
+    .col-xs-9
+      = @options[:name]

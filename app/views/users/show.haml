@@ -1,0 +1,19 @@
+%h1.text-center
+  @#{@user.username}'s Profile
+%h4.text-center
+  = @user.email
+%br
+%br
+%br
+%br
+.text-center
+  %a.btn.btn-info{ href: user_goals_path(@user) } REVIEW GOALS
+%br
+.text-center
+  %a.btn.btn-default{ href: new_user_goal_path(@user) } ＋ CREATE GOAL
+%br
+.text-center
+  %a.btn.btn-info{ href: user_feedbacks_path(@user) } REVIEW FEEDBACK
+%br
+.text-center
+  %a.btn.btn-default{ href: new_user_feedback_path(@user) } ＋ GIVE FEEDBACK

@@ -1,0 +1,74 @@
+.row#userNameAndRating
+  .col-xs-9
+    %div
+      = @user.name_and_username
+    %div
+      - (1..@user.average_rating).each do
+        = icon 'star', class: 'fa'
+      - (1..(5 - @user.average_rating)).each do
+        = icon 'star', class: 'greyStar'
+  .col-xs-3.pull-right
+    %a.pull-right.btn.btn-default{ href: team_path } TEAM
+- if @user.manager && !@user.manager.has_role?(:admin)
+  .row
+    .col-xs-12
+      Managed by
+      = @user.managers_name_and_username
+%br
+.greyHeaderBar.row
+  .col-xs-9.greyHeaderBarItem
+    GOALS
+  .col-xs-3.greyHeaderBarItem.pull-right
+    %a.greenButton.btn.pull-right{ href: user_feedbacks_path(@user) } FEEDBACK
+
+.text-center
+  .prettyListItem.row.text-center
+    .col-xs-6
+      %a.activeGoalFilter.listLink#inProgressButton IN PROGRESS
+    .col-xs-6
+      %a.listLink#completedButton COMPLETED
+
+#inProgressGoals
+  - counter = 1
+  - @goals_not_signed_off.each do |goal|
+    %a.listLink{ href: user_goal_path(@user, goal) }
+      .prettyListItem.row
+        .col-xs-1
+          = counter
+          - counter += 1
+        .col-xs-9
+          = goal.description
+        .col-xs-1.pull-right
+          = icon 'chevron-right', class: 'fa-2x pull-right'
+#completedGoals
+  - counter = 1
+  - @goals_signed_off.each do |goal|
+    %a.listLink{ href: user_goal_path(@user, goal) }
+      .prettyListItem.row
+        .col-xs-1
+          = counter
+          - counter += 1
+        .col-xs-9
+          = goal.description
+        .col-xs-1.pull-right
+          = icon 'chevron-right', class: 'fa-2x pull-right'
+- if can? :create, Goal
+  %a{ href: "/users/#{@user.id}/goals/new" }
+    .prettyListItem.row
+      .col-xs-12
+        = icon 'plus'
+        ADD A NEW GOAL
+
+:javascript
+  $("#completedButton").click(function(){
+    $("#inProgressGoals").hide();
+    $("#completedGoals").show();
+    $("#inProgressButton").removeClass('activeGoalFilter');
+    $(this).addClass('activeGoalFilter');
+  });
+  $("#inProgressButton").click(function(){
+    $("#completedGoals").hide();
+    $("#inProgressGoals").show();
+    $("#completedButton").removeClass('activeGoalFilter');
+    $(this).addClass('activeGoalFilter');
+  });

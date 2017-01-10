@@ -1,0 +1,1 @@
+{members: current_user.subordinates, pending_invites: current_user.pending_invites}.to_json

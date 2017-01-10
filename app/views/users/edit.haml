@@ -1,0 +1,38 @@
+%h1.text-center
+  Edit
+  @#{@user.username}
+%br
+= form_for @user, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    .col-xs-2
+      = f.label :photo, class: 'control-label'
+    .col-xs-10
+      = f.file_field :avatar
+  .form-group
+    .col-xs-6
+      = f.text_field :first_name, class: 'text-field form-control', placeholder: 'First Name'
+    .col-xs-6
+      = f.text_field :last_name, class: 'text-field form-control', placeholder: 'Last Name'
+  .form-group
+    = f.label :username, class: 'control-label sr-only'
+    .col-xs-12
+      = f.text_field :username, class: 'text-field form-control', placeholder: 'Username'
+  .form-group
+    = f.label :job_title, class: 'control-label sr-only'
+    .col-xs-12
+      = f.text_field :job_title, class: 'text-field form-control', placeholder: 'Job Title'
+  .form-group
+    = f.label :password, class: 'control-label sr-only'
+    .col-xs-12
+      = f.password_field :password, autocomplete: 'off', hint: 'leave it blank if you don\'t want to change it', required: false, class: 'text-field form-control', placeholder: 'New Password'
+  .form-group
+    = f.label :password_confirmation, class: 'control-label sr-only'
+    .col-xs-12
+      = f.password_field :password_confirmation, required: false, class: 'text-field form-control', placeholder: 'New Password Confirmation'
+  .form-group
+    = f.label :current_password, class: 'control-label sr-only'
+    .col-xs-12
+      = f.password_field :current_password, hint: 'we need your current password to confirm your changes', required: false, class: 'text-field form-control', placeholder: 'Current Password'
+  .form-group
+    .col-xs-12
+      = f.submit 'SAVE', class: 'btn btn-primary col-xs-12'

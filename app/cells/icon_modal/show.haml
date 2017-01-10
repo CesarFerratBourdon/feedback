@@ -1,0 +1,30 @@
+.modalDialog#iconModal
+  %br
+  %br
+  %br
+  .container
+    %a{ href: '#', class: 'pull-right', id: 'closeIconModalButton' } X
+    %br
+    %br
+    %h2.text-center Choose an icon
+    %br
+    = raw create_icon_row('Great', ['hand-rock-o', 'thumbs-up'])
+    %br
+    = raw create_icon_row('Good', ['star', 'smile-o'])
+    %br
+    = raw create_icon_row('Fair', ['question-circle', 'meh-o'])
+    %br
+    = raw create_icon_row('Let\'s talk', ['exclamation-triangle'])
+
+
+:javascript
+  $(".iconChoice").click(function(){
+    $("#iconChosen").val($(this).data("icon"));
+    $("#iconModal").hide('slow');
+  });
+  $("#iconButton").click(function(){
+    $("#iconModal").show('slow');
+  });
+  $("#closeIconModalButton").click(function(){
+    $("#iconModal").hide('slow');
+  });

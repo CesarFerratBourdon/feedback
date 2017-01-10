@@ -1,0 +1,21 @@
+%h1.text-center Feedback
+.text-center
+  .col-xs-12
+    = @feedback.feedback_with_sender
+  .col-xs-12
+    = @feedback.created_at.strftime('%m/%d/%y')
+    - if @feedback.rating
+      - (1..@feedback.rating).each do
+        = icon 'star'
+  - if @feedback.icon
+    %br
+    .col-xs-12
+      = icon @feedback.icon
+  - if @feedback.goal
+    %br
+    %a.col-xs-12{ href: user_goal_path(@user, @feedback.goal) }
+      = icon 'trophy'
+      = @feedback.goal.description
+.col-xs-12.text-center
+  %br
+  %a.btn.btn-default{ href: new_user_feedback_reply_path(@user, @feedback) } REPLY

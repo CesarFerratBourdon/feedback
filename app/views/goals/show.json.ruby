@@ -1,0 +1,1 @@
+@goal.to_json

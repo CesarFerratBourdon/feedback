@@ -1,0 +1,50 @@
+<div class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="pull-left">
+      <% if request.path =~ /^\/users\/.*\/goals\/?$/ %>
+        <a class="nohover" style="font-size: 1.5em; line-height: 50px; color: #FFFFFF" href="javascript:history.go(-1)"><%= icon 'chevron-left' %> back</a>
+      <% else %>
+        <a class="navbar-brand" href="/">feedbk</a>
+      <% end %>
+    </div>
+
+    <div class="pull-right" style="padding-top: 0.5em;">
+      <% if user_signed_in? %>
+        <%# Check if we are on the feedback page for the special case to show the team button that the client demanded. %>
+        <% if request.path =~ /^\/users\/.*\/feedbacks\/?$/ %>
+          <a class="btn btn-primary top-menu-button" role="button" href="<%= team_path %>">MY TEAM</a>
+        <% end %>
+        <a class="btn btn-primary top-menu-button" role="button"  data-toggle="offcanvas" data-target="#myNavmenu">MENU</a>
+      <% else %>
+        <a href="<%=new_session_path(User)%>" class="btn btn-primary top-menu-button">LOG IN</a>
+      <% end %>
+
+    </div>
+
+<!--   <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button> -->
+
+
+
+  </div><!-- /.container-fluid -->
+</div>
+
+<% if user_signed_in? %>
+  <!-- Use  offcanvas-md to make it automatically visible on big screens -->
+  <!-- Also add hidden-lg to toggle button to hide when visible. -->
+  <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
+    <a class="navmenu-brand" href="/dashboard"><%= image_tag current_user.avatar.url(:thumb), width: 30, class: 'circle-image' %> @<%= current_user.username %></a>
+    <ul class="nav navmenu-nav">
+      <!-- <li class="active"><a href="#">Home</a></li> -->
+      <li><a href="/team"><%=icon 'users', style: 'margin-right: 10px;' %> MY TEAM</a></li>
+      <li><a href="<%=user_feedbacks_path(current_user)%>"><%=icon 'coffee', style: 'margin-right: 10px;' %> MY FEEDBK</a></li>
+      <li><a href="<%=user_goals_path(current_user)%>"><%=icon 'trophy', style: 'margin-right: 10px;' %> MY GOALS</a></li>
+      <li><a href="<%=edit_user_path(current_user)%>"><%=icon 'user', style: 'margin-right: 10px;' %> MY PROFILE</a></li>
+      <li><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete, style: 'margin-left: 25px'%></a></li>
+    </ul>
+  </nav>
+<% end %>

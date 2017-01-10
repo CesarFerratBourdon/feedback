@@ -1,0 +1,135 @@
+:css
+  body{
+    scroll-snap-points-y: repeat(100vh);
+    scroll-snap-type: mandatory;
+  }
+  .mainContainer{
+    
+    
+    color: #FFFFFF;
+    padding: 0px;
+    overflow-x: hidden;
+    
+  }
+  body{
+    background-color: #0071bc;
+  }
+  .landingContainer{
+    padding-top: 20px;
+    height: 80vh;
+  }
+  .innerBackgroundHolder{
+    background-image:  linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ), url('landing-bg.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .alert{
+    margin-bottom: 0px;
+  }
+  #howItWorks{
+    background-color: #f2f2f2;
+    height: 100vh;
+    color: #0071bc;
+    padding-top: 5vh;
+  }
+  .howItWorksHeader{
+    height: 10vh;
+    font-size: 20px;
+    font-weight: strong;
+  }
+  .howItWorksCircleAndContent{
+    height: 25vh;
+  }
+  .howItWorksCircle{
+  }
+  .howItWorksContent{
+    color: #000000;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2vh;
+  }
+  .feedbkGoals{
+    color: #FFFFFF;
+    background-color: #0071bc;
+    padding-bottom: 5vh;
+  }
+  .feedbkGoalsHeader{
+    padding-top: 5vh;
+    font-size: 20px;
+  }
+  .feedbkGoalsContent{
+    padding-top: 5vh;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer{
+    height: 13vh;
+    background-color: #f2f2f2;
+    color: #0071bc;
+    padding-top: 3vh;
+    font-family: amperzand;
+    font-size: 2em;
+  }
+
+.innerBackgroundHolder
+  .landingContainer
+    .row
+      .col-xs-10.col-xs-offset-1
+        %h1.text-center Feedbk at work makes us more productive
+    %br
+    .text-center
+      %a.btn.btn-default{ href: '/users/role/admin/sign_up' } SET-UP YOUR TEAM
+    %br
+    .text-center
+      %a.btn.btn-primary{ href: '/users/role/employee/sign_up' } JOIN A TEAM
+  #learnMoreHolder{style: 'height: 16vh;'}
+    .howItWorksScrollLink.text-center{style: 'cursor: pointer;'}
+      Learn More
+    .howItWorksScrollLink.text-center{style: 'cursor: pointer;'}
+      = icon 'chevron-down'
+
+#howItWorks.text-center
+  .howItWorksHeader
+    HOW IT WORKS
+  .howItWorksCircleAndContent
+    .howItWorksCircle
+      %svg{height: 60, width: 60}
+        %circle{cx: 30, cy: 30, r: 25, 'stroke-width': 0, fill: '#0071bc'}
+        %text{x: '50%', y: '50%', 'text-anchor': 'middle', 'baseline-shift': '-8px', 'stroke-width': '0px', fill: '#FFFFFF', 'font-size': '25px'} 1
+
+    .howItWorksContent
+      Give and receive feedbk in one secure place.
+  .howItWorksCircleAndContent
+    .howItWorksCircle
+      %svg{height: 60, width: 60}
+        %circle{cx: 30, cy: 30, r: 25, 'stroke-width': 0, fill: '#0071bc'}
+        %text{x: '50%', y: '50%', 'text-anchor': 'middle', 'baseline-shift': '-8px', 'stroke-width': '0px', fill: '#FFFFFF', 'font-size': '25px'} 2
+
+    .howItWorksContent
+      Tell your reports how they're doing in the moment.
+  .howItWorksCircleAndContent
+    .howItWorksCircle
+      %svg{height: 60, width: 60}
+        %circle{cx: 30, cy: 30, r: 25, 'stroke-width': 0, fill: '#0071bc'}
+        %text{x: '50%', y: '50%', 'text-anchor': 'middle', 'baseline-shift': '-8px', 'stroke-width': '0px', fill: '#FFFFFF', 'font-size': '25px'} 3
+
+    .howItWorksContent
+      Each bit of feedbk is logged in a secure stream.  Easy to review for trends in performance and recall for annual reviews.
+.feedbkGoals.text-center
+  .feedbkGoalsHeader
+    FEEDBK GOALS
+  .feedbkGoalsContent
+    Keep it simple.  Having goals and tracking them is important to career progress and performance.  But most of us don't do it because it's a pain.
+  .feedbkGoalsContent
+    Now it isn't.  Use Feedbk Goals to set and track straight-forward quarterly goals.  And of course, give feedbk on the progress of each goal along the way.
+.footer.text-center
+  feedbk
+:javascript
+  $('.howItWorksScrollLink').click(function(){
+    $('html,body').animate({scrollTop: $('#howItWorks').offset().top},'slow');
+  });

@@ -1,0 +1,34 @@
+.modalDialog#ratingModal
+  %br
+  %br
+  %br
+  .container
+    %a.pull-right{ href: '#', id: 'closeRatingModalButton' } X
+    %br
+    %br
+    %h2.text-center
+      = @options[:title]
+    %br
+    %p.text-center
+      %input.rating{ type: 'hidden', id: 'employeeRatingWidget', 'data-filled': 'fa fa-star fa-3x', 'data-empty': 'fa fa-star-o fa-3x' }
+
+:javascript
+  $('#employeeRatingWidget').on('change', function () {
+    if($("#ratingChosen").length){
+      $("#ratingChosen").val($(this).val());
+    }else{
+      $('<input>').attr({
+        type: 'hidden',
+        id: 'ratingChosen',
+        name: 'feedback[rating]',
+        value: $(this).val()
+      }).appendTo('form');
+    }
+    $("#ratingModal").hide('slow');
+  });
+  $("#rateButton").click(function(){
+    $("#ratingModal").show('slow');
+  });
+  $("#closeRatingModalButton").click(function(){
+    $("#ratingModal").hide('slow');
+  });

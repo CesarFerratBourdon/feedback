@@ -1,0 +1,10 @@
+%div{ style: 'padding-top: 15px; padding-bottom: 30px; background-color: #0071bc; width: 100%; text-align: center;' }
+  = image_tag @feedback.sender.avatar.url(:thumb), style: 'width: 100px; margin-left: auto; margin-right: auto; display: block; border-radius: 50%;'
+  %h3{ style: 'color: #FFFFFF;' } You've received feedbk!
+%div{ style: 'background-color: #f2f2f2; width: 100%' }
+  %div{ style: 'text-align: left; background-color: #f2f2f2; color: #000000; padding-top: 30px; padding-bottom: 30px; padding-left: 15px; padding-right: 15px; max-width: 550px; margin-left: auto; margin-right: auto;' }
+    %h3{ style: 'color: #000000;' }
+      From
+      = @feedback.sender.name_and_username
+    %p
+      = @feedback.comment

@@ -1,0 +1,30 @@
+= form_for [@user, @goal], html: { class: 'form-horizontal', onsubmit:  'return validateForm()' } do |f|
+  .form-group
+    = f.label :description, "What's your goal?", class: 'control-label col-xs-12 sr-only'
+    .col-xs-12
+      = f.text_area :description, class: 'text-field form-control', placeholder: "What's your goal?", id: 'description'
+  .form-group
+    .col-xs-2
+      = f.label :date, 'Date', class: 'control-label'
+    .col-xs-8
+      = f.text_field :date, as: :string, class: 'text-field form-control a-datepicker'
+  .form-group
+    .col-xs-12
+      = f.submit 'CREATE GOAL', class: 'btn btn-primary col-xs-12'
+
+:javascript
+  $(document).ready(function(){
+    $('#goal_date').pickadate();
+  });
+  function validateForm() {
+    var d = $("#description").val();
+    if(d == null || d == ""){
+      alert("You must enter a goal description");
+      return false;
+    }
+    var d = $("#goal_date").val();
+    if (d == null || d == "") {
+      alert("You must select a date");
+      return false;
+    }
+  }

@@ -1,0 +1,31 @@
+%h1.text-center Feedback Reply
+.row
+  .col-xs-2.text-center
+    = image_tag @feedback.sender.avatar.url(:thumb), width: 50, class: 'circle-image'
+  .col-xs-10
+    = @feedback.comment
+  %div{ style: 'clear: both; height: 5px;' } &nbsp;
+  .col-xs-2
+    = @feedback.created_at.strftime('%m/%d/%y')
+  .col-xs-5
+    - if @feedback.rating
+      - (1..@feedback.rating).each do
+        = icon 'star'
+    - if @feedback.icon
+      %span{ style: 'margin-left: 10px;' }
+        = icon @feedback.icon
+  - if @feedback.goal
+    %br
+    %a.col-xs-12{ href: user_goal_path(@user, @feedback.goal) }
+      = icon 'trophy'
+      = @feedback.goal.description
+%br
+= form_for [@user, @feedback, @reply], html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :content, class: 'control-label sr-only'
+    .col-xs-12
+      = f.text_area :content, class: 'text-field form-control', placeholder: 'Enter Feedback (150 char. max)', maxlength: 150
+
+  .form-group
+    .col-xs-12
+      = f.submit 'SUBMIT', class: 'btn btn-primary col-xs-12'

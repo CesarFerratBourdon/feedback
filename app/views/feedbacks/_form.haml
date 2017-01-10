@@ -1,0 +1,55 @@
+= form_for [@user, @feedback], html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :comment, class: 'control-label sr-only'
+    .col-xs-12
+      = f.text_area :comment, class: 'text-field form-control', placeholder: 'Enter Feedback (150 char. max)', maxlength: 150
+  .form-group
+    .col-xs-12
+      %a.btn.btn-default.threeButtons#goalButton
+        = icon 'trophy'
+        Goal
+      %a.btn.btn-default.threeButtons.centeredButton#iconButton
+        = icon 'smile-o'
+        Icon
+      %a.btn.btn-default.threeButtons#rateButton
+        = icon 'star'
+        Rate
+      %input{ type: 'hidden', id: 'iconChosen', name: 'feedback[icon]' }
+      %input{ type: 'hidden', id: 'goalId', name: 'feedback[goal_id]' }
+
+  .form-group
+    .col-xs-12
+      = f.submit 'CREATE FEEDBACK', class: 'btn btn-primary col-xs-12'
+
+= cell :rating_modal, nil, title: 'Add a rating to this Feedbk'
+
+= cell :icon_modal
+
+.modalDialog#goalModal
+  %br
+  %br
+  %br
+  .container
+    %a.pull-right#closeGoalModalButton X
+    %h2.text-center Choose a goal
+    - if @user.current_goals.count > 0
+      - @user.current_goals.each do |g|
+        %a.col-xs-12.goalChoiceHolder{ 'data-goalid': g.id }
+          .col-xs-2
+            = icon 'trophy'
+          .col-xs-10
+            = g.description
+    - else
+      This user has no goals yet.
+
+:javascript
+  $("#goalButton").click(function(){
+    $("#goalModal").show('slow');
+  });
+  $("#closeGoalModalButton").click(function(){
+    $("#goalModal").hide('slow');
+  });
+  $(".goalChoiceHolder").click(function(){
+    $("#goalId").val($(this).data('goalid'));
+    $("#goalModal").hide('slow');
+  });

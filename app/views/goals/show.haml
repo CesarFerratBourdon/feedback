@@ -1,0 +1,132 @@
+.userHeader.row
+  .col-xs-4
+    = image_tag @user.avatar.url(:thumb), class: 'circle-image'
+  .col-xs-8
+    .row
+      .col-xs-12#userFirstLastName
+        = @user.first_name
+
+        = @user.last_name
+    .row
+      .col-xs-12#userRole
+        = @user.roles.first.name.camelize
+%br
+%h3.text-center
+  = @goal.description
+%br
+%br
+- if @goal.self_evaluation
+  %h4.text-center Self Evaluation
+  %p.text-center
+    = @goal.self_evaluation
+- if @goal.manager_evaluation
+  %h4.text-center Manager's Evaluation
+  .row
+    .col-xs-12
+      = @goal.manager_evaluation
+  .row
+    .col-xs-5
+      - (1..@goal.manager_eval_rating).each do
+        = icon 'star'
+      - (1..(5 - @goal.manager_eval_rating)).each do
+        = icon 'star', class: 'greyStar'
+      %span{ style: 'margin-left: 15px;' }
+        = icon @goal.manager_eval_icon
+    .col-xs-4
+      #{@goal.manager_eval_progress}% complete
+    .col-xs-3
+      = cell :quarter_circle, nil, progress: @goal.manager_eval_progress
+
+- if @goal.user == current_user
+  - if @goal.state == 'approved'
+    = form_for [@user, @goal], html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label :self_evaluation, 'Self Evaluation', class: 'control-label col-xs-12 sr-only'
+        .col-xs-12
+          = f.text_area :self_evaluation, class: 'text-field form-control', placeholder: 'Self Evaluation'
+      .form-group.text-center
+        .col-xs-12
+          = f.submit 'SUBMIT', class: 'btn btn-primary col-xs-12'
+  - elsif @goal.state == 'manager_eval'
+    .text-center
+      = link_to 'SIGN OFF', user_goal_sign_off_path(@user, @goal), method: :post, class: 'btn btn-default col-xs-12'
+- elsif current_user.has_role?(:manager)
+  - if @goal.state == 'self_eval_completed'
+    = form_for [@user, @goal], html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label :manager_evaluation, 'Manager Evaluation', class: 'control-label col-xs-12 sr-only'
+        .col-xs-12
+          = f.text_area :manager_evaluation, class: 'text-field form-control', placeholder: 'Manager Evaluation'
+      .form-group
+        .col-xs-12
+          %a.btn.btn-default.threeButtons#progressButton{href: '#'}
+            = icon 'adjust'
+            Progress
+          %a.btn.btn-default.threeButtons.centeredButton#iconButton
+            = icon 'smile-o'
+            Icon
+          %a.btn.btn-default.threeButtons#rateButton
+            = icon 'star'
+            Rate
+      %input#progressChosen{ type: 'hidden', name: 'goal[manager_eval_progress]', value: 0 }
+      %input#ratingChosen{ type: 'hidden', name: 'goal[manager_eval_rating]', value: 0 }
+      %input#iconChosen{ type: 'hidden', name: 'goal[manager_eval_icon]' }
+      .form-group.text-center
+        .col-xs-12
+          = f.submit 'SUBMIT', class: 'btn btn-primary col-xs-12'
+    = cell :rating_modal, nil, title: 'Rate the outcome of this goal'
+    = cell :icon_modal
+    .modalDialog#progressModal
+      %br
+      %br
+      %br
+      .container
+        %a.pull-right#closeProgressModalButton X
+        - [{ name: 'Completed', progress: 100 }, { name: 'Significant progress', progress: 75 }, { name: 'Some progress', progress: 50 }, { name: 'Little progress', progress: 25 }, { name: 'No progress', progress: 0 }].each do |p|
+          = cell :progress_choice, nil, progress: p[:progress], name: p[:name]
+        %a{ 'data-progress-value': -1 }
+          .row.progressChoiceHolder
+            .col-xs-3
+              .quarter-circle-holder{style: 'padding-left: 7px;'}
+                = icon 'arrow-circle-down', class: 'fa-3x icon-filled-grey'
+            .col-xs-9
+              Deprioritized
+
+    :javascript
+      $("#progressButton").click(function(){
+        $("#progressModal").show();
+      });
+      $("#closeProgressModalButton").click(function(){
+        $("#progressModal").hide('slow');
+      });
+      $(".progressChoiceHolder").click(function(){
+        $("#progressChosen").val($(this).parent().data('progress-value'));
+        $("#progressModal").hide('slow');
+      });
+
+- if @goal.state == 'new' && current_user.id != @goal.creator_id
+  - if current_user.has_role?(:manager) || current_user.id == @user.id
+    .text-center
+      = link_to 'APPROVE GOAL', user_goal_approve_path(@user, @goal), method: :post, class: 'btn btn-default greenButton col-xs-12'
+%h5.text-center
+  State:
+  = @goal_state_human_readable
+
+.row#stepsHeader
+  .col-xs-12
+    STEPS
+.stepsRow.row
+  .col-xs-1 1
+  .col-xs-10 Create a goal
+.stepsRow.row
+  .col-xs-1 2
+  .col-xs-10 Approve the goal
+.stepsRow.row{ class: ('stepsRowDisabled' if @goal.state == 'new') }
+  .col-xs-1 3
+  .col-xs-10 Self evaluation
+.stepsRow.row{ class: ('stepsRowDisabled' if @goal.state == 'new' || @goal.state == 'approved') }
+  .col-xs-1 4
+  .col-xs-10 Manager feedback
+.stepsRow.row{ class: ('stepsRowDisabled' if @goal.state == 'new' || @goal.state == 'approved' || @goal.state == 'self_eval_completed') }
+  .col-xs-1 5
+  .col-xs-10 Sign off on goal

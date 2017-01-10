@@ -1,0 +1,1 @@
+{in_progress: @goals_not_signed_off, completed: @goals_signed_off}.to_json

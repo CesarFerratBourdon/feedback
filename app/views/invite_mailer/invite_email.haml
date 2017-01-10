@@ -1,0 +1,11 @@
+%div{ style: 'padding-top: 15px; padding-bottom: 30px; background-color: #0071bc; width: 100%; text-align: center;' }
+  = image_tag @current_user.avatar.url(:thumb), style: 'width: 100px; margin-left: auto; margin-right: auto; display: block; border-radius: 50%;'
+  %h3{ style: 'color: #FFFFFF;' } You've been invited.
+  %a{ href: @invite_url, style: 'color: #0071bc; background-color: white; border-color: #cccccc; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; vertical-align: middle; touch-action: manipulation; cursor: pointer; background-image: none; border: 1px solid transparent; white-space: nowrap; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 4px; text-decoration: none;' } JOIN YOUR TEAM
+%div{ style: 'background-color: #f2f2f2; width: 100%'}
+  %div{ style: 'text-align: left; background-color: #f2f2f2; color: #000000; padding-top: 30px; padding-bottom: 30px; padding-left: 15px; padding-right: 15px; max-width: 550px; margin: auto;' }
+    Feedbk occurs when outputs of a system are routed back as inputs as part of a chain of cause-and-effect that forms a circuit or loop. The system can then be said to feedbk into itself.
+%div{ style: 'background-color: #FFFFFF; width: 100%; text-align: center;'}
+  %div{ style: 'padding-top: 30px; padding-bottom: 30px; max-width: 550px; margin: auto;' }
+    %h3{ style: 'color: #000000' } Start giving feedbk.
+    %a{ href: @invite_url, style: 'background-color: #459689; color: #FFFFFF; border-color: #cccccc; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; vertical-align: middle; touch-action: manipulation; cursor: pointer; background-image: none; border: 1px solid transparent; white-space: nowrap; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 4px; text-decoration: none;' } JOIN YOUR TEAM

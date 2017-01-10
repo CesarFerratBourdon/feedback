@@ -1,0 +1,82 @@
+.row.currentUserNameAndUsername
+  .col-xs-2
+    = image_tag @user.avatar.url(:thumb), width: 50, class: 'circle-image'
+  .col-xs-4
+    .row
+      .col-xs-12{ style: 'font-weight: bold;' }
+        = @user.full_name
+    .row
+      .col-xs-12
+        = @user.job_title
+    .row
+      .col-xs-12
+        @#{@user.username}
+  .pull-right{style: 'margin-right: 15px;'}
+    - (1..@user.average_rating).each do
+      = icon 'star', class: 'fa'
+    - (1..(5 - @user.average_rating)).each do
+      = icon 'star', class: 'greyStar'
+    %a.pull-right.btn.btn-default{ href: user_goals_path(@user), style: 'margin-left: 10px;' } GOALS
+%br
+-# Don't show 'new feedback' button unless user is a manager
+- if can?(:create, Feedback) && @user.id != current_user.id
+  %a{ href: new_user_feedback_path(@user) }
+    .whatsYourFeedbackBox.row
+      .col-xs-2
+        = image_tag current_user.avatar.url(:thumb), width: 50, class: 'circle-image'
+      .col-xs-8
+        What's your feedbk?
+
+
+
+.greyHeaderBar.row
+  .col-xs-9.greyHeaderBarItem
+    FEEDBK
+
+
+- @feedbacks.order('updated_at desc').each do |f|
+  .prettyListItem.row{class: ('feedbackWithGoal' if f.goal)}
+    .col-xs-2
+      = image_tag f.sender.avatar.url(:thumb), width: 50, class: 'circle-image'
+    .col-xs-10
+      @#{f.sender.username}: #{f.comment}
+      %div
+        = f.created_at.strftime('%m/%d/%y')
+        %span{style: 'margin-left: 10px;'}
+          - if f.rating
+            - (1..f.rating).each do
+              = icon 'star'
+            - (1..(5 - f.rating)).each do
+              = icon 'star-o'
+            %span{ style: 'margin-left: 10px;' }
+          - if f.icon
+            = icon f.icon
+        - if f.goal
+          - if can? :create, Reply
+            .pull-right
+              %a.btn.btn-default{ href: new_user_feedback_reply_path(@user, f) } REPLY
+          %div
+            = icon 'trophy'
+            = f.goal.description
+        - else
+          - if can? :create, Reply
+            .pull-right
+              %a.btn.btn-default{ href: new_user_feedback_reply_path(@user, f) } REPLY
+  - f.replies.order('updated_at asc').each do |r|
+    .prettyListItem.row{style: 'padding-left: 30px;'}
+      .col-xs-2
+        = image_tag r.user.avatar.url(:thumb), width: 50, class: 'circle-image'
+      .col-xs-2.pull-right
+        .pull-right
+          = r.created_at.strftime('%m/%d/%y')
+      .col-xs-8
+        @#{r.user.username} responds: #{r.content}
+
+:javascript
+  function replyButtonClicked(){
+    event.cancelBubble = true;
+    if(event.stopPropagation) event.stopPropagation();
+    var url = event.target.dataset.link;
+    // alert(url);
+    location.href = url;
+  }

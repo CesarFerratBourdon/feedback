@@ -1,0 +1,10 @@
+%div{ style: 'padding-top: 15px; padding-bottom: 30px; background-color: #0071bc; width: 100%; text-align: center;' }
+  = image_tag @current_user.avatar.url(:thumb), style: 'width: 100px; margin-left: auto; margin-right: auto; display: block; border-radius: 50%;'
+  %h3{ style: 'color: #FFFFFF;' } User already belongs to a team
+%div{ style: 'background-color: #f2f2f2; width: 100%'}
+  %div{ style: 'text-align: left; background-color: #f2f2f2; color: #000000; padding-top: 30px; padding-bottom: 30px; padding-left: 15px; padding-right: 15px; max-width: 550px; margin-left: auto; margin-right: auto;' }
+    %p
+      Another manager tried to invite your teammate to their team.
+      That manager is #{@current_user.name_and_username} and your teammate who they tried to invite is #{@user_being_stolen.name_and_username}
+    %p
+      Please go to the feedbk site and swipe left on that user's name if you wish to remove them from your team

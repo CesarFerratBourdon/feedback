@@ -1,0 +1,453 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+*= stub active_admin
+*= require pickadate/default
+*= require pickadate/default.date
+*= require_self
+*/
+
+@import "bootstrap_configuration";
+
+@import "bootstrap-sprockets";
+
+@import "bootstrap";
+
+@import "jasny-bootstrap.min";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+@import "bootstrap-rating";
+
+@font-face {
+    font-family: amperzand;
+    src: url(amperzand.ttf);
+}
+
+.navbar-brand {
+  font-family: amperzand;
+  font-size: 2em;
+}
+
+//->Prelang (ui_framework:twitter_bootstrap)
+
+// Give everything in 'yield' margin to separate it.
+.yield {
+  margin: 30px;
+}
+
+// Constrain forms for models (scaffolded models) so they aren't full page width.
+.form-model {
+  max-width: 750px;
+}
+
+//->Prelang (user_login:devise)
+.form-user {
+  max-width: 450px;
+}
+
+.navbar-default {
+  background-color: #0071bc;
+  border-color: #0071bc;
+  margin-bottom: 0px;
+
+}
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF;
+}
+
+$placeholder-text-color: #a0a0a0;
+
+.form-control::-webkit-input-placeholder {
+    color:    $placeholder-text-color;
+}
+.form-control:-moz-placeholder {
+    color:    $placeholder-text-color;
+}
+.form-control::-moz-placeholder {
+    color:    $placeholder-text-color;
+}
+.form-control:-ms-input-placeholder {
+    color:    $placeholder-text-color;
+}
+
+.form-control{
+  background-color: #EFEFEF;
+  color: #000000;
+}
+
+.top-menu-button{
+  background-color: #0071bc;
+  border-color: #e5e5e5;
+}
+
+.navmenu{
+  background-color: #4d4d4d;
+  width: 200px;
+}
+
+.navmenu-default .navmenu-nav > li > a{
+  color: #FFFFFF;
+}
+
+.navmenu-default .navmenu-nav > li > a:hover{
+  color: #e5e5e5;
+}
+
+
+.navmenu-default .navmenu-brand{
+  color: #FFFFFF;
+}
+
+.navmenu-default a.navmenu-brand:hover{
+  color: #e5e5e5;
+}
+
+
+
+.navbar {
+    border-radius: 0px;
+    border: 0px;
+}
+
+$width-of-page: 450px;
+$container-left-margin: 200px;
+
+.container{
+  max-width: $width-of-page;
+  border: 0px;
+}
+
+@media (min-width: 768px) {
+  /* line 10, /Users/chris/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: $width-of-page;
+    margin-left: 20%;
+  }
+  body{
+    background-image: url("bg.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+@media (min-width: 992px) {
+  /* line 10, /Users/chris/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: $width-of-page;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 10, /Users/chris/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: $width-of-page;
+  }
+}
+
+.columnToRow{
+  float: left;
+}
+
+@media (max-width: 320px){
+  .columnToRow{
+    float: none;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto !important;
+  }
+}
+
+.feedbackWithGoal{
+  background-color: #00a89d !important;
+}
+.centeredButton{
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.threeButtons{
+  width: 31%;
+}
+
+.modalDialog{
+  /** Default lightbox to hidden */
+  display: none;
+
+  /** Position and style */
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+
+  background: rgba(255,255,255,1);
+}
+
+.iconRowHeader{
+  font-size: 1.4em;
+}
+
+.goalChoiceHolder{
+  border: 1px solid #0071bc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.prettyListItem{
+  background-color: #0071bc;
+  color: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+a.listLink{
+  color: #FFFFFF;
+}
+
+.feedbackReplyButton{
+  margin-right: 15px;
+}
+
+#completedGoals{
+  display: none;
+}
+
+#userFirstLastName{
+  font-size: 1.8em;
+  margin-top: 15px;
+}
+
+#userRole{
+  font-size: 1.3em;
+}
+
+.userHeader{
+  background-color: #efefef;
+  margin-top: -20px;
+}
+
+.greenButton{
+  background-color: #459689;
+  color: #FFFFFF;
+}
+
+.greyButton{
+  background-color: #a4a4a4;
+}
+
+#stepsHeader{
+  background-color: #c1c1c1;
+  color: #000000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.stepsRow{
+  background-color: #489b8c;
+  border-top: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.stepsRowDisabled{
+  background-color: #efefef;
+  color: #c4c4c4;
+}
+
+.greyHeaderBar{
+  background-color: #c1c1c1;
+  color: #555555;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.greyHeaderBarItem{
+  padding-top: 15px;
+  padding-bottom: 10px;
+
+}
+
+#userNameAndRating{
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.teamMemberRow{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid #ececec;
+}
+
+.whatsYourFeedbackBox{
+  background-color: #efefef;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+.activeGoalFilter{
+  border-bottom: 2px solid white;
+}
+
+
+.donut-holder {
+    position: relative;
+    float: left;
+}
+
+.donut-holder h3 {
+    text-align:center;
+    position: absolute;
+    width: 100%;
+    font-size: 10px;
+}
+
+svg.donut {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+
+.circle_animation {
+  stroke-dasharray: 110; /* this value is the pixel circumference of the circle */
+  stroke-dashoffset: 110;
+}
+
+.quarter-circle-75 .circle_animation {
+    animation: quarter-circle-75 1s ease-out forwards;
+}
+.quarter-circle-100 .circle_animation {
+    animation: quarter-circle-100 1s ease-out forwards;
+}
+
+.quarter-circle-50 .circle_animation {
+    animation: quarter-circle-50 1s ease-out forwards;
+}
+
+.quarter-circle-25 .circle_animation {
+    animation: quarter-circle-25 1s ease-out forwards;
+}
+
+.quarter-circle-0 .circle_animation {
+    animation: quarter-circle-0 1s ease-out forwards;
+}
+
+
+
+
+@keyframes quarter-circle-75 {
+  to {
+    stroke-dashoffset: 28;
+  }
+}
+
+@keyframes quarter-circle-100 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes quarter-circle-50 {
+  to {
+    stroke-dashoffset: 55;
+  }
+}
+
+@keyframes quarter-circle-25 {
+  to {
+    stroke-dashoffset: 83;
+  }
+}
+
+@keyframes quarter-circle-0 {
+  to {
+    stroke-dashoffset: 110;
+  }
+}
+
+
+
+$quarter-filled-color: #aaaaaa;
+
+
+.icon-filled-grey{
+  color: $quarter-filled-color;
+}
+
+.progressChoiceHolder{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid #dedede;
+  border-top: 1px solid #e8e8e8;
+}
+
+.mainContainer{
+  background-color: #FFFFFF;
+  padding-top: 20px;
+  /*height: -moz-calc(100% - 50px);
+  height: -webkit-calc(100% - 50px);
+  height: calc(100% - 50px);
+  */
+  min-height: calc(100% - 50px);
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+html,body {
+  height:100%;
+  width: 100;
+}
+
+.greyStar{
+  color: #E2E2E2;
+}
+
+.navbar-brand {
+  font-family: amperzand;
+  font-size: 2em;
+  float: left;
+}
+
+.badged{
+  position: relative;
+}
+
+.badged[data-badge]:before {
+   content:attr(data-badge);
+   position:absolute;
+   top:-10px;
+   left:-10px;
+   font-size:.7em;
+   background: rgba(255, 100, 100, 1);
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
+
+.circle-image{
+  border-radius: 50%;
+}
+
+.nohover:hover{
+  text-decoration: none;
+}
+
